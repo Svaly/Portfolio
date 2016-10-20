@@ -1,0 +1,34 @@
+﻿@using Portfolio.Domain.Entities;
+@model IEnumerable<Project>
+
+@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+
+}
+
+@section Projects
+{
+
+    @foreach (var p in Model)
+    {
+        if (p.Active == "Aktywny")
+        {
+            <div class="container">
+                <div class="row row-centered">
+                    <div class="col-xs-6 col-centered"><div class="item"><div class="content">                     
+                        <label>@p.Title</label>
+                        <br/>
+                        <label>Data realizacji:</label>
+                        @p.RealizationDate.ToString("dd/MM/yyyy")
+                    </div></div></div>
+
+                    <div class="col-xs-6 col-centered"><div class="item"><div class="content">
+                        @p.Description
+                    </div></div></div>
+
+                    
+                </div>
+            </div>
+        }
+    }
+ }

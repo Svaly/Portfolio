@@ -1,0 +1,21 @@
+﻿@using Portfolio.Domain.Entities;
+@model  IEnumerable<Image>
+@{
+    Layout = null;
+    string imagePath = App.imagePath;
+}
+
+
+    @foreach (var item in Model)
+    {
+        string path = imagePath + item.Name;
+        <div class="text-center">
+            <img src="@Url.Content(path)" class="img-fluid" alt="Responsive image" />
+        </div>
+    }
+
+
+
+
+
+
