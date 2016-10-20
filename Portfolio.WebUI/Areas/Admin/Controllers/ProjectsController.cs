@@ -27,7 +27,6 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
         public ActionResult AllProjects()
         {
             return View(projectRepository.Projects);
-
         }    
 
         public ActionResult Create()
@@ -54,7 +53,6 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
                 
             }
                 return View("Create", project);
-                   
         }
 
         [HttpParamAction]
@@ -64,8 +62,6 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
             Project project = projectRepository.Projects.FirstOrDefault(p => p.Id == projectId);
             return View("Create", project);
         }
-
-
 
         [HttpParamAction]
         [AcceptVerbs(HttpVerbs.Post)]
@@ -90,7 +86,6 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
                 projectRepository.Deactivate(project);
             }
             return RedirectToAction("AllProjects");
-
         }
 
     }

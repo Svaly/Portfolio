@@ -12,10 +12,7 @@ namespace Portfolio.WebUI
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-          
-
-
+   
             routes.MapRoute("Home", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = UrlParameter.Optional }, new[] { "Portfolio.WebUI.Controllers" });
             routes.MapRoute("AdminHome", "Admin/{controller}/{action}/{id}", new {controller="Home", action = "Index", id = UrlParameter.Optional }, new[] { "Portfolio.WebUI.Areas.Admin.Controllers" });
             

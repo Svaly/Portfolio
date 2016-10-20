@@ -18,8 +18,7 @@ namespace Portfolio.Domain.Concrete
             }
 
         public void Add(Image image)
-        {
-        
+        {  
             context.Images.Add(image);
             context.SaveChanges();
         }
@@ -32,10 +31,7 @@ namespace Portfolio.Domain.Concrete
                 context.Images.Remove(dbEntry);
                 context.SaveChanges();
             }
-
             return dbEntry;
         }
-
-    }
-    
+    }    
 }

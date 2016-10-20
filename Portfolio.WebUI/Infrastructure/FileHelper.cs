@@ -90,7 +90,8 @@ namespace Portfolio.WebUI.Infrastructure
                 bmPhoto.SetResolution(imgPhoto.HorizontalResolution, imgPhoto.VerticalResolution);
 
                 Graphics grPhoto = Graphics.FromImage(bmPhoto);
-                grPhoto.Clear(Color.Red);
+                grPhoto.Clear(Color.White);
+          
                 grPhoto.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 grPhoto.DrawImage(imgPhoto, new Rectangle(destX, destY, destWidth, destHeight), new Rectangle(sourceX, sourceY, sourceWidth, sourceHeight), GraphicsUnit.Pixel);
                 grPhoto.Dispose();

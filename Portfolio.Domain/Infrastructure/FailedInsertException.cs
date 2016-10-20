@@ -14,12 +14,12 @@ namespace Portfolio.Domain.Infrastructure
 
         public FailedInsertException(string message)
         : base(message)
-    {
+        {
         }
 
         public FailedInsertException(string message, Exception inner)
         : base(message, inner)
-    {
-        }
+         {
+         }
     }
 }

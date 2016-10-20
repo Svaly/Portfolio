@@ -38,10 +38,8 @@ namespace Portfolio.Domain.Concrete
             context.SaveChanges();
         }
 
-
         public Project SaveProject(Project project)
-        {
-       
+        {    
             if (project.Id == 0)
             {
                 project.LastEditDate= DateTime.Now;
@@ -68,9 +66,7 @@ namespace Portfolio.Domain.Concrete
                 {
                     throw new FailedInsertException("Błąd dodawania projektu");
                 }
-              
             }
         }
-
     }
 }

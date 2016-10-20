@@ -23,7 +23,6 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
         {
             this.imageRepository = imageRepository;
         }
-
         
         public ActionResult ProjectImages(int id)
         {
@@ -37,23 +36,19 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
             else
             {
                 return null;
-            } 
-            
+            }        
         }
 
         [HttpPost]
         public ActionResult Delete(int projectId, int Id)
-        {
-           
+        {    
                 Image deletedImage = imageRepository.Delete(Id);
                 if (deletedImage != null)
                 {
                     TempData["message_succes"] = string.Format("Usunięto {0}", deletedImage.Name);
                 }           
-
             return RedirectToAction("ProjectImages", projectId);
         }
-
 
         [HttpPost]
         public ActionResult Upload(HttpPostedFileBase file, int id)
@@ -70,7 +65,7 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
                 string thumbnailName = renderedFileName + "_thumb.jpg";
                 string thumbnailPath = Path.Combine(Server.MapPath(imagePath), thumbnailName);
 
-                FileHelper.SaveResizedImage(filePath, thumbnailPath, 100,200);
+                FileHelper.SaveResizedImage(filePath, thumbnailPath, 150,150);
 
                 Image savedImage = new Image();
                 savedImage.ProjectId = projectId;
@@ -79,13 +74,8 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
                 
                 imageRepository.Add(savedImage);
             }
-    
-
-            // after successfully uploading redirect the user
             return RedirectToAction("EditProject",  new { controller = "Projects", action = "EditProject", projectId = id });
         }
-
-
 
         private IEnumerable<Image> GetImagesByProjectId(int projectId)
         {
@@ -93,7 +83,6 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
                .OrderBy(i => i.Id)
                .Select(i => new Image { Id = i.Id, ProjectId = i.ProjectId, Name = i.Name, ThumbnailName = i.ThumbnailName })
                .ToList();
-
             return images;
         }
 

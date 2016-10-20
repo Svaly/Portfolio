@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace Portfolio.WebUI.Controllers
 {
-    public class HomeController : Controller
+    public class AboutMeController : Controller
     {
-        // GET: Home
+        // GET: AboutMe
         public ActionResult Index()
         {
             return View();

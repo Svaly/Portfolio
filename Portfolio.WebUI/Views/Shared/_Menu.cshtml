@@ -11,10 +11,10 @@
             
                  <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">O mnie</a></li>
-                        <li><a href="#">Projekty</a></li>
-                        <li><a href="#">Kontakt</a></li>
+                        <li class="active">@Html.ActionLink("Start","Index","Home")</li>
+                        <li>@Html.ActionLink("O mnie", "Index", "AboutMe")</li>
+                        <li>@Html.ActionLink("Projekty", "Index", "Projects")</li>
+                        <li>@Html.ActionLink("Kontakt", "Index", "Contact")</li>
                     </ul>
                 </div>
          </div>
