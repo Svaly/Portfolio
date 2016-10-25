@@ -32,7 +32,7 @@ namespace Portfolio.WebUI.Infrastructure
                 origImg.Dispose();
             }
 
-            public static Image ScaleByPercent(Image imgPhoto, int percent)
+        public static Image ScaleByPercent(Image imgPhoto, int percent)
             {
                 float nPercent = ((float)percent / 100);
                 int sourceWidth = imgPhoto.Width;

@@ -9,14 +9,15 @@
 
     @foreach (var p in Model)
     {
+        
         if (p.Active == "Aktywny")
         {
 
             <div class="row row-centered">
                 <div class="col-xs-12 col-centered">
                     <div class="panel panel-default">
-                        <div class="panel-heading">@p.Title</div>
-                        <div class="panel-body">
+                        <div class="panel-heading h3">@p.Title</div>
+                        <div class="panel-body flip" id="flip">
                             
                             @if (p.Images.Any())
                             {
@@ -29,11 +30,15 @@
                             <div class="content">
                                 <label>Data realizacji:</label>
                                 @p.RealizationDate.ToString("dd/MM/yyyy")
-                            </div>
-
-                            <div class="content">
-                                <label>Opis:</label>
-                                @p.Description
+                                <p>@p.Description</p>
+                            </div>             
+                            
+                            <div id="panel" class="col-xs-10 flip-panel">
+                                @foreach (var img in p.Images)
+                                {
+                                    <img src="@Url.Content(ViewBag.imagePath.ToString() + img.Name)" alt="" style='height: 100%; width: 720px;'   />
+                                    <br/>
+                                }
                             </div>
                         </div>
                     </div>

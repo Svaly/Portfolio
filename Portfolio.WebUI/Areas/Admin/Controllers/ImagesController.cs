@@ -60,8 +60,8 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
                 string renderedFileName = Path.GetRandomFileName();
                 string fileName = renderedFileName + Path.GetExtension(file.FileName); 
                 string filePath = Path.Combine(Server.MapPath(imagePath), fileName);
+      
                 file.SaveAs(filePath);
-
                 string thumbnailName = renderedFileName + "_thumb.jpg";
                 string thumbnailPath = Path.Combine(Server.MapPath(imagePath), thumbnailName);
 

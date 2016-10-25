@@ -1,0 +1,8 @@
+﻿#panel, #flip {
+            text-align: center;
+            background-color: #e5eecc;          
+        }
+
+        #panel {      
+            display: none;
+        }
