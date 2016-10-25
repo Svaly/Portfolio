@@ -9,6 +9,8 @@ using NSubstitute;
 using Portfolio.Domain;
 using Portfolio.Domain.Abstract;
 using System.Web.Mvc;
+using NSubstitute.Core.Arguments;
+
 namespace Portfolio.WebUI.Areas.Admin.Controllers.Tests
 {
     [TestFixture()]
@@ -50,11 +52,9 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers.Tests
         }
 
         [Test()]
-        public void SaveTest()
+        public void SaveTest_CanSaveProjectAndRedirectToAction()
         {
             IProjectRepository fakeProjectRepository = Substitute.For<IProjectRepository>();
-
-            ProjectsController controller = new ProjectsController(fakeProjectRepository);
 
               Projects p1 = new Projects
                 {
@@ -67,11 +67,17 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers.Tests
                     LastEditDate = testedDateTime,
                     Active = "Aktywny"
                 };
+            fakeProjectRepository.SaveProject(Arg.Any<Projects>()).Returns(p1);
 
-            var result = controller.Save(p1);
+            ProjectsController controller = new ProjectsController(fakeProjectRepository);
+
+            var result = (RedirectToRouteResult)controller.Save(p1);
+
             fakeProjectRepository.ReceivedWithAnyArgs(1);
-           
 
+            Assert.AreEqual("EditProject", result.RouteValues["action"]);
+            Assert.AreEqual("Projects", result.RouteValues["controller"]);
+            Assert.AreEqual(p1.Id, result.RouteValues["projectId"]);
         }
 
         [Test()]
