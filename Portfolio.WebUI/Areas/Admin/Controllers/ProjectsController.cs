@@ -6,11 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Portfolio.Domain.Concrete;
-using Portfolio.Domain.Entities;
+using Portfolio.Domain;
 using Portfolio.Domain.Abstract;
 using Portfolio.WebUI.Infrastructure;
 using Portfolio.Domain.Infrastructure;
+
 
 namespace Portfolio.WebUI.Areas.Admin.Controllers
 {
@@ -31,18 +31,18 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            return View("Create", new Project());
+            return View("Create", new Projects());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save([Bind(Include = "ID,Title,Category,Description,RealizationDate,AddedDate,LastEditDate,Active ")]Project project)
+        public ActionResult Save([Bind(Include = "ID,Title,Category,Description,RealizationDate,AddedDate,LastEditDate,Active ")]Projects project)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    Project savedProject = projectRepository.SaveProject(project);
+                    Projects savedProject = projectRepository.SaveProject(project);
                     TempData["message_succes"] = string.Format("Zapisano {0}", project.Title);
                     return RedirectToAction("EditProject", new { controller = "Projects", action = "EditProject", projectId = savedProject.Id });
                 }
@@ -59,7 +59,7 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult EditProject(int projectId)
         {
-            Project project = projectRepository.Projects.FirstOrDefault(p => p.Id == projectId);
+            Projects project = projectRepository.Projects.FirstOrDefault(p => p.Id == projectId);
             return View("Create", project);
         }
 
@@ -68,7 +68,7 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
         public ActionResult Activate(int projectId )
         {
    
-           Project project = projectRepository.Projects.FirstOrDefault(p => p.Id == projectId);
+           Projects project = projectRepository.Projects.FirstOrDefault(p => p.Id == projectId);
             if (ModelState.IsValid && project!=null)
             {
                 projectRepository.Activate(project);               
@@ -80,7 +80,7 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Deactivate(int projectId )
         {
-         Project project = projectRepository.Projects.FirstOrDefault(p => p.Id == projectId);
+         Projects project = projectRepository.Projects.FirstOrDefault(p => p.Id == projectId);
             if (ModelState.IsValid && project != null)
             {
                 projectRepository.Deactivate(project);

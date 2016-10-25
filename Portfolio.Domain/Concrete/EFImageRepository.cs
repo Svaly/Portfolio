@@ -4,28 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Portfolio.Domain.Abstract;
-using Portfolio.Domain.Entities;
 
 namespace Portfolio.Domain.Concrete
 {
     public class EFImageRepository : IImageRepository
-    {      
-            private EfDbContext context = new EfDbContext();
+    {
+        private PortfolioEntities context = new PortfolioEntities();
 
-            public IEnumerable<Image> Images
-            {
-                get { return context.Images; }
-            }
+        public IEnumerable<Images> Images
+        {
+            get { return context.Images; }
+        }
 
-        public void Add(Image image)
-        {  
+        public void Add(Images image)
+        {
             context.Images.Add(image);
             context.SaveChanges();
         }
 
-        public Image Delete(int imageId)
+        public Images Delete(int imageId)
         {
-            Image dbEntry = context.Images.Find(imageId);
+            Images dbEntry = context.Images.Find(imageId);
             if (dbEntry != null)
             {
                 context.Images.Remove(dbEntry);
@@ -33,5 +32,5 @@ namespace Portfolio.Domain.Concrete
             }
             return dbEntry;
         }
-    }    
+    }
 }

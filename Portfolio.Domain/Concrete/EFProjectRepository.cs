@@ -4,33 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Portfolio.Domain.Abstract;
-using Portfolio.Domain.Entities;
 using Portfolio.Domain.Infrastructure;
+using System.Data.Entity;
 
 namespace Portfolio.Domain.Concrete
 {
     public class EFProjectRepository : IProjectRepository
     {
-        private EfDbContext context = new EfDbContext();
+        private PortfolioEntities context = new PortfolioEntities();
 
-        public IEnumerable<Project> Projects
+        public IEnumerable<Projects> Projects
         {
-            get { return context.Projects; }
+            get { return context.Projects.Include(p => p.Images); }
         }
 
-        public void Activate(Project project)
+        public void Activate(Projects project)
         {
-            Project dbEntry = context.Projects.Find(project.Id);
+            Projects dbEntry = context.Projects.Find(project.Id);
             if (dbEntry != null)
             {
                 dbEntry.Active = "Aktywny";
             }
-            context.SaveChanges();
+            context.SaveChanges();          
         }
 
-        public void Deactivate(Project project)
+        public void Deactivate(Projects project)
         {
-            Project dbEntry = context.Projects.Find(project.Id);
+            Projects dbEntry = context.Projects.Find(project.Id);
             if (dbEntry != null)
             {
                 dbEntry.Active = "Nie aktywny";
@@ -38,19 +38,19 @@ namespace Portfolio.Domain.Concrete
             context.SaveChanges();
         }
 
-        public Project SaveProject(Project project)
-        {    
+        public Projects SaveProject(Projects project)
+        {
             if (project.Id == 0)
             {
-                project.LastEditDate= DateTime.Now;
-                project.AddedDate= DateTime.Now;
+                project.LastEditDate = DateTime.Now;
+                project.AddedDate = DateTime.Now;
                 context.Projects.Add(project);
                 context.SaveChanges();
                 return project;
             }
             else
             {
-                Project dbEntry = context.Projects.Find(project.Id);
+                Projects dbEntry = context.Projects.Find(project.Id);
                 if (dbEntry != null)
                 {
                     dbEntry.Title = project.Title;

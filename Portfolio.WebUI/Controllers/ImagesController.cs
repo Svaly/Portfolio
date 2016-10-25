@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.HtmlControls;
 using Portfolio.Domain.Abstract;
-using Portfolio.Domain.Entities;
+using Portfolio.Domain;
 
 namespace Portfolio.WebUI.Controllers
 {
@@ -24,7 +24,7 @@ namespace Portfolio.WebUI.Controllers
         // GET: Images
         public ActionResult ProjectThumbnail(int projectId)
         {
-            Image image =imageRepository.Images.FirstOrDefault(i => i.ProjectId == projectId);
+            Images image =imageRepository.Images.FirstOrDefault(i => i.ProjectId == projectId);
 
             if (image != null)
             {

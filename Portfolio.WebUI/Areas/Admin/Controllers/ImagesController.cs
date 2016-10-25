@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Portfolio.Domain.Abstract;
-using Portfolio.Domain.Entities;
+using Portfolio.Domain;
 using Portfolio.WebUI.Infrastructure;
 
 namespace Portfolio.WebUI.Areas.Admin.Controllers
@@ -27,7 +27,7 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
         public ActionResult ProjectImages(int id)
         {
             int projectId = id;
-            IEnumerable<Image> images = GetImagesByProjectId(projectId);
+            IEnumerable<Images> images = GetImagesByProjectId(projectId);
 
             if (images.Any())
             {
@@ -42,7 +42,7 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int projectId, int Id)
         {    
-                Image deletedImage = imageRepository.Delete(Id);
+                Images deletedImage = imageRepository.Delete(Id);
                 if (deletedImage != null)
                 {
                     TempData["message_succes"] = string.Format("Usunięto {0}", deletedImage.Name);
@@ -67,7 +67,7 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
 
                 FileHelper.SaveResizedImage(filePath, thumbnailPath, 150,150);
 
-                Image savedImage = new Image();
+                Images savedImage = new Images();
                 savedImage.ProjectId = projectId;
                 savedImage.Name = fileName;
                 savedImage.ThumbnailName = thumbnailName;
@@ -77,11 +77,11 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
             return RedirectToAction("EditProject",  new { controller = "Projects", action = "EditProject", projectId = id });
         }
 
-        private IEnumerable<Image> GetImagesByProjectId(int projectId)
+        private IEnumerable<Images> GetImagesByProjectId(int projectId)
         {
-            IEnumerable<Image> images = imageRepository.Images.Where(i => i.ProjectId == projectId)
+            IEnumerable<Images> images = imageRepository.Images.Where(i => i.ProjectId == projectId)
                .OrderBy(i => i.Id)
-               .Select(i => new Image { Id = i.Id, ProjectId = i.ProjectId, Name = i.Name, ThumbnailName = i.ThumbnailName })
+               .Select(i => new Images { Id = i.Id, ProjectId = i.ProjectId, Name = i.Name, ThumbnailName = i.ThumbnailName })
                .ToList();
             return images;
         }

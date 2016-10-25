@@ -1,34 +1,41 @@
-﻿@using Portfolio.Domain.Entities;
-@model IEnumerable<Project>
+﻿@using Antlr.Runtime
+@using Portfolio.Domain
+@model IEnumerable<Projects>
+
 
 <div class="container">
+
     <h3>Projekty</h3>
 
     @foreach (var p in Model)
     {
         if (p.Active == "Aktywny")
         {
-                      
+
             <div class="row row-centered">
-                <div class="col-xs-6 col-centered">
+                <div class="col-xs-12 col-centered">
                     <div class="panel panel-default">
                         <div class="panel-heading">@p.Title</div>
                         <div class="panel-body">
                             
-                            <div class="img-thumbnail pull-left">                             
-                                <img src="" alt="" />                                
+                            @if (p.Images.Any())
+                            {
+                                <div class="img-thumbnail pull-left">
+                                    <img src="@Url.Content(ViewBag.imagePath.ToString() + p.Images.FirstOrDefault().ThumbnailName)" alt=""/>
+                                </div>
+                            }
+
+
+                            <div class="content">
+                                <label>Data realizacji:</label>
+                                @p.RealizationDate.ToString("dd/MM/yyyy")
                             </div>
 
-                                <div class="content">
-                                    <label>Data realizacji:</label>
-                                    @p.RealizationDate.ToString("dd/MM/yyyy")
-                                </div>
-
-                                <div class="content">
-                                    <label>Opis:</label>
-                                    @p.Description
-                                </div>
+                            <div class="content">
+                                <label>Opis:</label>
+                                @p.Description
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>

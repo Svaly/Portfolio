@@ -265,6 +265,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\ActionFilters\GlobalAttributeViewActionFilter.cs" />
     <Compile Include="Infrastructure\FileHelper.cs" />
     <Compile Include="Infrastructure\HttpParamActionAttribute.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />

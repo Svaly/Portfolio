@@ -1,8 +1,8 @@
-﻿@using Portfolio.Domain.Entities;
-@model  IEnumerable<Image>
+﻿@using Portfolio.Domain
+@model  IEnumerable<Images>
 @{
     Layout = null;
-    string imagePath = App.imagePath;
+    string imagePath = ViewBag.imagePath.ToString();
 }
 
 

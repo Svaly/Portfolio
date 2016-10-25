@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Portfolio.Domain.Entities;
 
 namespace Portfolio.Domain.Abstract
 {
     public interface IProjectRepository
     {
-        IEnumerable<Project> Projects { get; }
+        IEnumerable<Projects> Projects { get; }
 
-        void Activate(Project project);
+        void Activate(Projects project);
 
-        void Deactivate(Project project);
+        void Deactivate(Projects project);
 
-        Project SaveProject(Project project);
+        Projects SaveProject(Projects project);
 
     }
 
