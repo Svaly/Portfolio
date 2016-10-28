@@ -37,6 +37,8 @@ namespace Portfolio.WebUI.Infrastructure
 
             kernel.Bind<IImageRepository>().To<EFImageRepository>();
 
+            kernel.Bind<IProfileInfoRepository>().To<EFProfileInfoRepository>();
+
         }
 
     }
