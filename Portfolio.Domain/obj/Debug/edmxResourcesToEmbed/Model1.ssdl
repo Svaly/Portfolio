@@ -9,6 +9,16 @@
     <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="ThumbnailName" Type="varchar" MaxLength="255" Nullable="false" />
   </EntityType>
+  <EntityType Name="Profile">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Image" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
   <EntityType Name="Projects">
     <Key>
       <PropertyRef Name="Id" />
@@ -36,6 +46,7 @@
   </Association>
   <EntityContainer Name="PortfolioModelStoreContainer">
     <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__Images__ProjectI__38996AB5" Association="Self.FK__Images__ProjectI__38996AB5">
       <End Role="Projects" EntitySet="Projects" />

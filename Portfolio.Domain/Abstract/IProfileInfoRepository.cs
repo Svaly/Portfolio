@@ -9,7 +9,7 @@ namespace Portfolio.Domain.Abstract
     public interface IProfileInfoRepository
     {
 
-        Profile GetProfile { get; }
+        Profile Profile { get; }
 
         Profile SaveProfile(Profile profile);
     }

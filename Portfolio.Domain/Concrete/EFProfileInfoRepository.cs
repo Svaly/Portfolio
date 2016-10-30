@@ -17,13 +17,13 @@ namespace Portfolio.Domain.Concrete
         {          
             get
             {
-                return context.Profile.First();
+                return  context.Profile.FirstOrDefault();                          
             }
         }
 
         public Profile SaveProfile(Profile profile)
         {
-            Profile dbEntry = context.Profile.First();
+            Profile dbEntry = context.Profile.FirstOrDefault();
 
             if (dbEntry!=null)
             {

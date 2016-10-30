@@ -81,8 +81,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IImageRepository.cs" />
+    <Compile Include="Abstract\IProfileInfoRepository.cs" />
     <Compile Include="Abstract\IProjectRepository.cs" />
     <Compile Include="Concrete\EFImageRepository.cs" />
+    <Compile Include="Concrete\EFProfileInfoRepository.cs" />
     <Compile Include="Concrete\EFProjectRepository.cs" />
     <Compile Include="Images.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -93,10 +95,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Projects.cs">
       <DependentUpon>Model1.tt</DependentUpon>

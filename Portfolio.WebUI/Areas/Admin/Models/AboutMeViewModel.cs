@@ -1,18 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
+using System.Linq;
+using System.Web;
 
-namespace Portfolio.Domain
+namespace Portfolio.WebUI.Areas.Admin.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
-    public partial class Profile
+    public class AboutMeViewModel
     {
-        [HiddenInput(DisplayValue = false)]
-        public int Id { get; set; }
 
-        [Display(Name = "Imi�")]
-        [Required(ErrorMessage = "Wpisz imi�")]
+        [Display(Name = "Imię")]
+        [Required(ErrorMessage = "Wpisz imię")]
         [DataType(DataType.Text)]
         public string Name { get; set; }
 
@@ -27,6 +25,10 @@ namespace Portfolio.Domain
         public string Description { get; set; }
 
 
-        public string Image { get; set; }
+        [Display(Name = "Wybierz nową grafikę")]
+        [DataType(DataType.Upload)]
+        public HttpPostedFileBase ImageUpload { get; set; }
+
+
     }
 }
