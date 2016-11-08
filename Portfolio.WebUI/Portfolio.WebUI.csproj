@@ -259,6 +259,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AboutMeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ContactController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectsController.cs" />
@@ -299,6 +300,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Contact\" />
     <Folder Include="Areas\Admin\Views\Images\" />
     <Folder Include="Models\" />
   </ItemGroup>

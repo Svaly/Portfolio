@@ -16,6 +16,7 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
     {
         private IProfileInfoRepository profileRepository;
         private string imagePath = "~/images/";
+
         public AboutMeController(IProfileInfoRepository profileRepository)
         {
             this.profileRepository = profileRepository;
@@ -26,12 +27,12 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
         public ActionResult Profile()
         {
 
-             Profile profileFromDB = profileRepository.Profile;
+            Profile profileFromDB = profileRepository.Profile;
 
-             AboutMeViewModel profileToDispaly = new AboutMeViewModel();
+            AboutMeViewModel profileToDispaly = new AboutMeViewModel();
 
             ViewBag.Image = "";
-            if (profileFromDB!=null)
+            if (profileFromDB != null)
             {
                 profileToDispaly.Description = profileFromDB.Description;
                 profileToDispaly.Name = profileFromDB.Name;
@@ -42,10 +43,50 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
             return View("AboutMe", profileToDispaly);
         }
 
-
-        public ActionResult Save(AboutMeViewModel model)
+        [HttpPost]
+        public ActionResult Save(AboutMeViewModel profileToSave)
         {
-       
+            if (ModelState.IsValid)
+            {
+                Profile editedProfile = profileRepository.Profile;
+
+                if (profileToSave.ImageUpload != null)
+                {
+                    try
+                    {
+                        ImageIsValid(profileToSave);
+                        if (editedProfile.Image != null)
+                        {
+                            DeleteOldImage(editedProfile.Image);
+                        }
+                        editedProfile.Image = SaveNewImage(profileToSave);
+                    }
+                    catch (Exception ex)
+                    {
+                        TempData["message_warning"] = String.Format("{0}, spróbuj ponownie", ex.Message);
+                        return RedirectToAction("Profile");
+                    }
+                }
+                else
+                {
+                    editedProfile.Image = "";
+                }           
+                editedProfile.Description = profileToSave.Description;
+                editedProfile.Name = profileToSave.Name;
+                editedProfile.Surname = profileToSave.Surname;
+
+                profileRepository.SaveProfile(editedProfile);
+                TempData["message_succes"] = "Zapisano pomyślnie";
+            }
+            return RedirectToAction("Profile");
+        }
+
+
+
+
+
+        public void ImageIsValid(AboutMeViewModel model)
+        {
             var validImageTypes = new string[]
             {
                 "image/gif",
@@ -53,52 +94,38 @@ namespace Portfolio.WebUI.Areas.Admin.Controllers
                 "image/pjpeg",
                 "image/png"
             };
-
-         if (model.ImageUpload != null )
-         {
-             if (model.ImageUpload.ContentLength > 0 && !validImageTypes.Contains(model.ImageUpload.ContentType))
-             {
-                    ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
-             }
-         }
-
-            if (ModelState.IsValid)
+            if (model.ImageUpload.ContentLength > 0 && !validImageTypes.Contains(model.ImageUpload.ContentType))
             {
-                Profile savedProfile = profileRepository.Profile;
-
-                if (savedProfile == null)
-                {
-                    return new HttpNotFoundResult();
-                }
-
-                savedProfile.Description = model.Description;
-                savedProfile.Name = model.Name;
-                savedProfile.Surname = model.Surname;
-
-                if (model.ImageUpload != null && model.ImageUpload.ContentLength > 0)
-                {
-                    if (System.IO.File.Exists(Path.Combine(Server.MapPath(imagePath), savedProfile.Image)))
-                        {                   
-                            try
-                            {
-                                System.IO.File.Delete(Path.Combine(Server.MapPath(imagePath), savedProfile.Image));
-                            }
-                            catch (System.IO.IOException e)
-                            {
-                            }
-                    }
-
-
-                    string renderedFileName = Path.GetRandomFileName();
-                    string fileName = renderedFileName + Path.GetExtension(model.ImageUpload.FileName);
-                    string filePath = Path.Combine(Server.MapPath(imagePath), fileName);
-                    model.ImageUpload.SaveAs(filePath);
-                    savedProfile.Image = fileName;
-                }
-                profileRepository.SaveProfile(savedProfile);
+                throw new InvalidDataException("Nieprawidłowe rozszeżenie pliku");
             }
-            return RedirectToAction("Profile");
+            
         }
 
+        public void DeleteOldImage(string imgName)
+        {
+            if (System.IO.File.Exists(Path.Combine(Server.MapPath(imagePath), imgName)))
+            {
+                try
+                {
+                    System.IO.File.Delete(Path.Combine(Server.MapPath(imagePath), imgName));
+                }
+                catch (System.IO.IOException e)
+                {
+                    throw new IOException("Błąd zmiany zdjęcia");
+                }
+            }
+         
+        }
+
+        public string SaveNewImage(AboutMeViewModel model)
+        {       
+                string renderedFileName = Path.GetRandomFileName();
+                string fileName = renderedFileName + Path.GetExtension(model.ImageUpload.FileName);
+                string filePath = Path.Combine(Server.MapPath(imagePath), fileName);
+                model.ImageUpload.SaveAs(filePath);
+            return fileName;
+            }
+        }
+
+
     }
-}

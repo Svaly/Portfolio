@@ -80,6 +80,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ContactRepository.cs" />
     <Compile Include="Abstract\IImageRepository.cs" />
     <Compile Include="Abstract\IProfileInfoRepository.cs" />
     <Compile Include="Abstract\IProjectRepository.cs" />

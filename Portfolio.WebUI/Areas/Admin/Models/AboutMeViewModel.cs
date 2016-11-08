@@ -24,11 +24,9 @@ namespace Portfolio.WebUI.Areas.Admin.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-
         [Display(Name = "Wybierz nową grafikę")]
         [DataType(DataType.Upload)]
         public HttpPostedFileBase ImageUpload { get; set; }
-
 
     }
 }
