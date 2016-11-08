@@ -9,6 +9,7 @@
         <EntityTypeShape EntityType="PortfolioModel.Projects" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="PortfolioModel.FK__Images__ProjectI__38996AB5" ManuallyRouted="false" />
         <EntityTypeShape EntityType="PortfolioModel.Profile" Width="1.5" PointX="5.5" PointY="1.375" />
+        <EntityTypeShape EntityType="PortfolioModel.Contact" Width="1.5" PointX="0.75" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

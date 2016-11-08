@@ -28,5 +28,6 @@ namespace Portfolio.Domain
         public virtual DbSet<Images> Images { get; set; }
         public virtual DbSet<Projects> Projects { get; set; }
         public virtual DbSet<Profile> Profile { get; set; }
+        public virtual DbSet<Contact> Contact { get; set; }
     }
 }
