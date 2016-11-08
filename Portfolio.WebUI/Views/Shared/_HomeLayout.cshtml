@@ -12,19 +12,19 @@
     <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
     <script src="~/Scripts/custom-scripts.js"></script>
     <link href="~/Content/custom-syle.css" rel="stylesheet" />
-    
-
 
 </head>
 <body>
 
-    <div>
-        @Html.Partial("_Menu")
-    </div>
+<div>
+    @Html.Partial("_Menu")
+</div>
 
 
-    <div>
-        @RenderBody()
-    </div>
+<div class="container-fluid">
+    @RenderBody()
+</div>
+    
+
 </body>
 </html>

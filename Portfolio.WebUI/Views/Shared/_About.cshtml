@@ -1,1 +1,23 @@
-﻿
+﻿@model Portfolio.Domain.Profile
+@{
+    ViewBag.Title = "O mnie";
+}
+
+
+    <div class="container-fluid text-center">
+        <h2>O mnie</h2>
+    </div>
+
+    <div class="container-fluid about">
+        <div class="col-md-4 col-md-offset-4 ">
+            <div class="text-center">
+                <img src="@Url.Content(ViewBag.imagePath.ToString()+Model.Image)" class="img-fluid" />
+                <p>@Model.Name @Model.Surname </p>
+        </div>
+    </div>
+
+    <div class="col-md-8 text-justify col-md-offset-2 ">
+        <p>@Model.Description</p>
+    </div>
+</div>
+

@@ -3,9 +3,12 @@
 @model IEnumerable<Projects>
 
 
-<div class="container">
+<div class="container-fluid text-center">
 
-    <h3>Projekty</h3>
+    <h2>Projekty</h2>
+</div>
+  
+<div class="container-fluid">
 
     @foreach (var p in Model)
     {
@@ -14,15 +17,15 @@
         {
 
             <div class="row row-centered">
-                <div class="col-xs-12 col-centered">
+                <div class="col-md-8 col-md-offset-2 col-centered">
                     <div class="panel panel-default">
-                        <div class="panel-heading h3">@p.Title</div>
+                        <div class="panel-heading ">@p.Title</div>
                         <div class="panel-body flip" id="flip">
                             
                             @if (p.Images.Any())
                             {
-                                <div class="img-thumbnail pull-left">
-                                    <img src="@Url.Content(ViewBag.imagePath.ToString() + p.Images.FirstOrDefault().ThumbnailName)" alt=""/>
+                                <div class="col-md-3">
+                                    <img class="img-responsive" src="@Url.Content(ViewBag.imagePath.ToString() + p.Images.FirstOrDefault().ThumbnailName)" alt=""/>
                                 </div>
                             }
 
@@ -33,12 +36,12 @@
                                 <p>@p.Description</p>
                             </div>             
                             
-                            <div id="panel" class="col-xs-10 flip-panel">
-                                @foreach (var img in p.Images)
-                                {
-                                    <img src="@Url.Content(ViewBag.imagePath.ToString() + img.Name)" alt="" style='height: 100%; width: 720px;'   />
-                                    <br/>
-                                }
+                            <div id="panel" class="flip-panel col-md-9">                             
+                                    @foreach (var img in p.Images)
+                                    {                            
+                                            <img class="img-responsive center-block" src="@Url.Content(ViewBag.imagePath.ToString() + img.Name)" alt="" />
+                                          
+                                    }                              
                             </div>
                         </div>
                     </div>

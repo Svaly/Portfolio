@@ -13,5 +13,11 @@ namespace Portfolio.WebUI.Controllers
         {
             return View();
         }
+
+        public ActionResult GetContact()
+        {
+
+            return View("_Contact");
+        }
     }
 }

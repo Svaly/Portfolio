@@ -6,3 +6,7 @@
         #panel {      
             display: none;
         }
+
+#about {
+    background-color: green;
+}
